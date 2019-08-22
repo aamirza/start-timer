@@ -1,16 +1,11 @@
 class Timer {
     constructor() {
-        // What would be the timer's "properties"?
-        // The website has loaded. What does the timer do at first?
-        // Well, at first the timer is paused, correct?
         this.countDown = false;
         this.countUp = false;
-        // It is also currently on break? Not necessarily.
         this.shortBreak = false;
         this.longBreak = false;
         this.working = false;
         this.pause = true;
-        // What is it currently set to? It's a dynamic value?
         this.timerBody = document.querySelector("#timer");
         this.formValues = document.querySelector("#work-params");
         this.mainButton = document.querySelector("#main-button");
