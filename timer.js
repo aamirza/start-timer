@@ -9,6 +9,7 @@ class Timer {
         this.timerBody = document.querySelector("#timer");
         this.formValues = document.querySelector("#work-params");
         this.mainButton = document.querySelector("#main-button");
+        this.secondButton = document.querySelector("#second-button");
     }
 
     get workTime() {
@@ -39,6 +40,10 @@ class Timer {
         this.mainButton.textContent = text;
     }
 
+    set secondButtonText(text) {
+        this.secondButton.textContent = text;
+    }
+
     convertToTime(timeInSeconds) {
         function pad(number) {
             if (number < 10) {
@@ -57,10 +62,12 @@ class Timer {
 
     startTimer() {
         let secondsLapsed = 0;
-        setInterval(function() {
+        setInterval(() => {
             if (!this.pause) {
                 secondsLapsed += 1;
                 timer.timerText = (timer.workTime*60) - secondsLapsed;
+            } else if (this.pause) {
+                clearInterval();
             }
         }, 1000)
     }
@@ -73,7 +80,27 @@ class Timer {
             this.pause = false;
             this.countDown = true;
             this.mainButtonText = "Stop";
+            this.secondButtonText = "Pause";
             this.startTimer();
+        }
+    }
+
+    secondButtonPress(buttonEvent) {
+        const command = buttonEvent.target.textContent.toLowerCase();
+        if (command === "reset") {
+            this.countDown = false;
+            this.countUp = false;
+            this.shortBreak = false;
+            this.longBreak = false;
+            this.working = false;
+            this.pause = true;
+            document.querySelector("#work").value = 10;
+            document.querySelector("#sbreak").value = 3;
+            this.timerText = 10*60;
+            this.mainButtonText = "Start";
+            this.secondButtonText = "Reset";
+        } else if (command === "pause") {
+            this.pause = true;
         }
     }
 }
