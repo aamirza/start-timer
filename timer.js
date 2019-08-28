@@ -10,18 +10,24 @@ class Timer {
         this.formValues = document.querySelector("#work-params");
         this.mainButton = document.querySelector("#main-button");
         this.secondButton = document.querySelector("#second-button");
+        this.workField = document.querySelector("#work");
+        this.shortBreakField = document.querySelector("#sbreak")
     }
 
     get workTime() {
-        return document.querySelector("#work").value;
+        return this.workField.value;
     }
 
     get shortBreakTime() {
-        return document.querySelector("#sbreak").value;
+        return this.shortBreakField.value;
     }
 
     get secondsRemaining() {
         return this.timerBody
+    }
+
+    get onBreak() {
+        return (this.shortBreak || this.longBreak);
     }
 
     set timerText(seconds) {
@@ -62,12 +68,13 @@ class Timer {
 
     startTimer() {
         let secondsLapsed = 0;
-        setInterval(() => {
-            if (!this.pause) {
-                secondsLapsed += 1;
+        return setInterval(() => {
+            if (!this.pause && (this.working || this.onBreak)) {
+                secondsLapsed += 10;
                 timer.timerText = (timer.workTime*60) - secondsLapsed;
             } else if (this.pause) {
-                clearInterval();
+                //clearInterval();
+                secondsLapsed += 0;
             }
         }, 1000)
     }
@@ -81,7 +88,17 @@ class Timer {
             this.countDown = true;
             this.mainButtonText = "Stop";
             this.secondButtonText = "Pause";
-            this.startTimer();
+            this.runningTimer = this.startTimer();
+        } else if (command === "stop") {
+            this.working = false;
+            this.pause = false;
+            this.countDown = false;
+            this.mainButtonText = "Start";
+            this.secondButtonText = "Reset";
+            this.shortBreak = false;
+            this.longBreak = false;
+            this.timerText = this.workTime*60;
+            clearInterval(this.runningTimer);
         }
     }
 
@@ -94,13 +111,17 @@ class Timer {
             this.longBreak = false;
             this.working = false;
             this.pause = true;
-            document.querySelector("#work").value = 10;
-            document.querySelector("#sbreak").value = 3;
+            this.workField.value = 10;
+            this.shortBreakField.value = 3;
             this.timerText = 10*60;
             this.mainButtonText = "Start";
             this.secondButtonText = "Reset";
         } else if (command === "pause") {
             this.pause = true;
+            this.secondButtonText = "Unpause";
+        } else if (command === "unpause") {
+            this.pause = false;
+            this.secondButtonText = "Pause";
         }
     }
 }
