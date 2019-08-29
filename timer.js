@@ -6,6 +6,7 @@ class Timer {
         this.longBreak = false;
         this.working = false;
         this.pause = true;
+        this.secondsElapsed = 0;
         this.timerBody = document.querySelector("#timer");
         this.formValues = document.querySelector("#work-params");
         this.mainButton = document.querySelector("#main-button");
@@ -18,12 +19,12 @@ class Timer {
         return this.workField.value;
     }
 
-    get shortBreakTime() {
-        return this.shortBreakField.value;
+    set workTime(minutes) {
+        this.workField.value = minutes;
     }
 
-    get secondsRemaining() {
-        return this.timerBody
+    get shortBreakTime() {
+        return this.shortBreakField.value;
     }
 
     get onBreak() {
@@ -35,7 +36,7 @@ class Timer {
             this.countDown = true;
             this.countUp = false;
             this.timerBody.innerHTML = this.convertToTime(seconds);
-        } else {
+        } else if (this.working) {
             this.countUp = true;
             this.countDown = false;
             this.timerBody.innerHTML = "+" + this.convertToTime(seconds*-1);
@@ -66,17 +67,34 @@ class Timer {
         return (h ? `${h}:${mm}:${ss}` : `${mm}:${ss}`);
     }
 
-    startTimer() {
-        let secondsLapsed = 0;
+    startTimer(seconds) {
+        this.secondsElapsed = 0;
         return setInterval(() => {
             if (!this.pause && (this.working || this.onBreak)) {
-                secondsLapsed += 10;
-                timer.timerText = (timer.workTime*60) - secondsLapsed;
+                this.secondsElapsed += 1;
+                timer.timerText = seconds - this.secondsElapsed;
+                if (this.onBreak && this.secondsElapsed >= seconds) {
+                    this.stopCommand();
+                }
             } else if (this.pause) {
-                //clearInterval();
-                secondsLapsed += 0;
+                this.secondsElapsed += 0;
+            }
+            if (this.countUp && this.mainButton.innerHTML === "Stop") {
+                this.mainButtonText = "Break";
             }
         }, 1000)
+    }
+
+    stopCommand() {
+        this.working = false;
+        this.pause = false;
+        this.countDown = false;
+        this.mainButtonText = "Start";
+        this.secondButtonText = "Reset";
+        this.shortBreak = false;
+        this.longBreak = false;
+        this.timerText = this.workTime*60;
+        clearInterval(this.runningTimer);
     }
 
     mainButtonPress(buttonEvent) {
@@ -88,17 +106,23 @@ class Timer {
             this.countDown = true;
             this.mainButtonText = "Stop";
             this.secondButtonText = "Pause";
-            this.runningTimer = this.startTimer();
+            this.runningTimer = this.startTimer(this.workTime*60);
         } else if (command === "stop") {
+            this.stopCommand()
+        } else if (command === "break") {
+            clearInterval(this.runningTimer);
+            this.countDown = true;
+            this.countUp = false;
+            this.shortBreak = true;
+            this.longBreak = false;
             this.working = false;
             this.pause = false;
-            this.countDown = false;
-            this.mainButtonText = "Start";
+            this.working = false;
+            this.pause = false;
+            this.mainButtonText = "Stop";
             this.secondButtonText = "Reset";
-            this.shortBreak = false;
-            this.longBreak = false;
-            this.timerText = this.workTime*60;
-            clearInterval(this.runningTimer);
+            this.workTime = Math.floor(this.secondsElapsed/60);
+            this.runningTimer = this.startTimer(this.shortBreakTime*60);
         }
     }
 
