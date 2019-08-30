@@ -74,7 +74,7 @@ class Timer {
                 this.secondsElapsed += 1;
                 timer.timerText = seconds - this.secondsElapsed;
                 if (this.onBreak && this.secondsElapsed >= seconds) {
-                    this.stopCommand();
+                    this.breakOver();
                 }
             } else if (this.pause) {
                 this.secondsElapsed += 0;
@@ -83,6 +83,11 @@ class Timer {
                 this.mainButtonText = "Break";
             }
         }, 1000)
+    }
+
+    breakOver() {
+        this.stopCommand();
+        alert("Your break is over!");
     }
 
     stopCommand() {
