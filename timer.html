@@ -14,6 +14,16 @@ I can maybe also let it add a description of what I was working on.
  -->
 
 <html>
+<head>
+<style>
+table, td, th, tr {
+    border: 1px solid black;
+}
+th, tr {
+    padding: 1px 5px;
+}
+</style>
+</head>
 <body>
     <p id="timer">10:00</p>
     <form id ="work-params">
@@ -24,6 +34,17 @@ I can maybe also let it add a description of what I was working on.
     </form>
     <button id="main-button">Start</button>
     <button id="second-button">Reset</button>
+    <audio src="./beep.mp3" preload="auto" controls="none" style="display: none;"></audio>
+     <table id="work-table" style="margin-top: 20px">
+         <tr>
+             <th>Start</th>
+             <th>Work</th>
+             <th>Break</th>
+         </tr>
+         <tr>
+             <td colspan=3 id="no-work-recorded">No work time recorded yet</td>
+         </tr>
+     </table>
 </body>
 <script src="timer.js"></script>
 <script src="app.js"></script>
