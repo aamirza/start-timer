@@ -13,6 +13,8 @@ class Timer {
         this.secondButton = document.querySelector("#second-button");
         this.workField = document.querySelector("#work");
         this.shortBreakField = document.querySelector("#sbreak")
+        this.sound = document.querySelector("audio");
+        this.table = new Table();
     }
 
     get workTime() {
@@ -21,6 +23,14 @@ class Timer {
 
     set workTime(minutes) {
         this.workField.value = minutes;
+    }
+
+    set pageTitle(title) {
+        if (!document.querySelector("title")) {
+            const titleElement = document.createElement("title");
+            document.querySelector("head").appendChild(titleElement);
+        }
+        document.querySelector("title").innerHTML = title;
     }
 
     get shortBreakTime() {
@@ -73,6 +83,7 @@ class Timer {
             if (!this.pause && (this.working || this.onBreak)) {
                 this.secondsElapsed += 1;
                 timer.timerText = seconds - this.secondsElapsed;
+                this.pageTitle = this.timerBody.innerHTML;
                 if (this.onBreak && this.secondsElapsed >= seconds) {
                     this.breakOver();
                 }
@@ -85,9 +96,19 @@ class Timer {
         }, 1000)
     }
 
+    beep() {
+        if (document.querySelector("input[name=sound]").checked) {
+            this.sound.play();
+        } else {
+            this.sound.pause();
+        }
+    }
+
     breakOver() {
         this.stopCommand();
+        this.beep();
         alert("Your break is over!");
+        this.sound.pause();
     }
 
     stopCommand() {

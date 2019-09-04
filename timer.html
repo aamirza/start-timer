@@ -6,7 +6,6 @@ A "sound"? Y/N option would also be nice.
 START
 It will start, and then it will ring after the time is up, say, 10 minutes.
 But unlike other timers, it will keep going, and it will record for how long I've been going.
-When you press --stop--, your break timer will start (say 5 minutes). It will ring and stop after 5 minutes.
 Next time you start working, it will show you how long you worked last time, and you can choose to add more or less,
 until you feel like actually working.
 Maybe a table showing when I started working, stopped working, how long I worked etc. would also be nice.
@@ -14,6 +13,16 @@ I can maybe also let it add a description of what I was working on.
  -->
 
 <html>
+<head>
+<style>
+table, td, th, tr {
+    border: 1px solid black;
+}
+th, tr {
+    padding: 1px 5px;
+}
+</style>
+</head>
 <body>
     <p id="timer">10:00</p>
     <form id ="work-params">
@@ -24,6 +33,17 @@ I can maybe also let it add a description of what I was working on.
     </form>
     <button id="main-button">Start</button>
     <button id="second-button">Reset</button>
+    <audio src="./beep.mp3" preload="auto" controls="none" style="display: none;"></audio>
+     <table id="work-table" style="margin-top: 20px">
+         <tr>
+             <th>Start</th>
+             <th>Work</th>
+             <th>Break</th>
+         </tr>
+         <tr>
+             <td colspan=3 id="no-work-recorded">No work time recorded yet</td>
+         </tr>
+     </table>
 </body>
 <script src="timer.js"></script>
 <script src="app.js"></script>
