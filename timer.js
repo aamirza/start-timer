@@ -14,7 +14,7 @@ class Timer {
         this.workField = document.querySelector("#work");
         this.shortBreakField = document.querySelector("#sbreak")
         this.sound = document.querySelector("audio");
-        this.table = new Table();
+        this.table = new Table(document.querySelector("#work-table"));
     }
 
     get workTime() {

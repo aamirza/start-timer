@@ -35,16 +35,17 @@ th, tr {
     <button id="second-button">Reset</button>
     <audio src="./beep.mp3" preload="auto" controls="none" style="display: none;"></audio>
      <table id="work-table" style="margin-top: 20px">
-         <tr>
+         <tr id="header-row">
              <th>Start</th>
              <th>Work</th>
              <th>Break</th>
          </tr>
-         <tr>
+         <tr class="no-work">
              <td colspan=3 id="no-work-recorded">No work time recorded yet</td>
          </tr>
      </table>
 </body>
+<script src="Table.js"></script>
 <script src="timer.js"></script>
 <script src="app.js"></script>
 </html>
