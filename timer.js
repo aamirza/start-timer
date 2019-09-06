@@ -15,6 +15,7 @@ class Timer {
         this.shortBreakField = document.querySelector("#sbreak")
         this.sound = document.querySelector("audio");
         this.table = new Table(document.querySelector("#work-table"));
+
     }
 
     get workTime() {
@@ -61,18 +62,18 @@ class Timer {
         this.secondButton.textContent = text;
     }
 
-    convertToTime(timeInSeconds) {
-        function pad(number) {
-            if (number < 10) {
-                return "0" + number;
-            } else {
-                return number;
-            }
+    pad(number) {
+        if (number < 10) {
+            return "0" + number;
+        } else {
+            return number;
         }
+    }
 
+    convertToTime(timeInSeconds) {
         const h = Math.floor(timeInSeconds / 3600);
-        const mm = pad(Math.floor(timeInSeconds / 60) - (60*h));
-        const ss = pad(timeInSeconds % 60);
+        const mm = this.pad(Math.floor(timeInSeconds / 60) - (60*h));
+        const ss = this.pad(timeInSeconds % 60);
 
         return (h ? `${h}:${mm}:${ss}` : `${mm}:${ss}`);
     }
@@ -132,6 +133,8 @@ class Timer {
             this.countDown = true;
             this.mainButtonText = "Stop";
             this.secondButtonText = "Pause";
+            let now = new Date();
+            this.startTime = this.pad(now.getHours()) + ":" + this.pad(now.getMinutes());
             this.runningTimer = this.startTimer(this.workTime*60);
         } else if (command === "stop") {
             this.stopCommand()
@@ -147,7 +150,10 @@ class Timer {
             this.pause = false;
             this.mainButtonText = "Stop";
             this.secondButtonText = "Reset";
-            this.workTime = Math.floor(this.secondsElapsed/60);
+            const timeWorked = Math.floor(this.secondsElapsed/60);
+            this.workTime = timeWorked;
+            this.table.removeNoWorkRow();
+            this.table.addWorkRow(this.startTime, timeWorked, this.shortBreakTime);
             this.runningTimer = this.startTimer(this.shortBreakTime*60);
         }
     }
