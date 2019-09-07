@@ -1,0 +1,25 @@
+body {
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%;
+    text-align: center;
+}
+
+table {
+    margin-top: 20px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#timer {
+    font-size: 4rem;
+    margin-bottom: 2px;
+}
+
+table, td, th, tr {
+    border: 1px solid black;
+}
+
+th, tr {
+    padding: 1px 5px;
+}

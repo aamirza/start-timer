@@ -30,25 +30,40 @@ class Table {
         this.table.appendChild(tableRow);
     }
 
+    calculateTotal(rowsCollection) {
+        let total = 0;
+        for (var i = 0; i < rowsCollection.length; i++) {
+            total += parseFloat(rowsCollection[i].innerHTML);
+        }
+        return total;
+    }
+
+    createTotalsRow() {
+        const footerRow = document.createElement("tfoot");
+        footerRow.setAttribute("class", "footer-col")
+        const firstCell = document.createElement("td");
+        firstCell.setAttribute("id", "total-text");
+        firstCell.innerHTML = "Total: ";
+        const totalWorkCell = document.createElement("td");
+        totalWorkCell.setAttribute("id", "total-work");
+        const totalBreakCell = document.createElement("td");
+        totalBreakCell.setAttribute("id", "total-break");
+        footerRow.appendChild(firstCell);
+        footerRow.appendChild(totalWorkCell);
+        footerRow.appendChild(totalBreakCell);
+        this.table.appendChild(footerRow);
+        this.totalsRow = document.querySelector(".footer-col");
+    }
+
     calculateTotalsRow() {
         if (!this.totalsRow) {
-            const footerRow = document.createElement("tfoot");
-            footerRow.setAttribute("class", "footer-col")
-            const firstCell = document.createElement("td");
-            firstCell.setAttribute("id", "total-text");
-            firstCell.innerHTML = "Total: ";
-            const totalWork = document.createElement("td");
-            totalWork.setAttribute("id", "total-work");
-            const totalBreak = document.createElement("td");
-            totalBreak.setAttribute("id", "total-break");
-            footerRow.appendChild(firstCell);
-            footerRow.appendChild(totalWork);
-            footerRow.appendChild(totalBreak);
-            this.table.appendChild(footerRow);
-            this.totalsRow = document.querySelector(".footer-col");
+            this.createTotalsRow();
         }
-        const allWorkColumns = document.getElementsByClassName(".work-time");
-        const allBreakColumns = document.getElementsByClassName(".break-time");
-
+        const allWorkRows = document.querySelectorAll(".work-time");
+        const allBreakRows = document.querySelectorAll(".break-time");
+        const totalWork = this.calculateTotal(allWorkRows);
+        const totalBreak = this.calculateTotal(allBreakRows);
+        document.querySelector("#total-work").innerHTML = totalWork;
+        document.querySelector("#total-break").innerHTML = totalBreak;
     }
 }
