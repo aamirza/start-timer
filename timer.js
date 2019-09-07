@@ -82,7 +82,7 @@ class Timer {
         this.secondsElapsed = 0;
         return setInterval(() => {
             if (!this.pause && (this.working || this.onBreak)) {
-                this.secondsElapsed += 1;
+                this.secondsElapsed += 10;
                 timer.timerText = seconds - this.secondsElapsed;
                 this.pageTitle = this.timerBody.innerHTML;
                 if (this.onBreak && this.secondsElapsed >= seconds) {
@@ -154,6 +154,7 @@ class Timer {
             this.workTime = timeWorked;
             this.table.removeNoWorkRow();
             this.table.addWorkRow(this.startTime, timeWorked, this.shortBreakTime);
+            this.table.calculateTotalsRow();
             this.runningTimer = this.startTimer(this.shortBreakTime*60);
         }
     }
