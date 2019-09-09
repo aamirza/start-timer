@@ -16,6 +16,29 @@ table {
     margin-bottom: 2px;
 }
 
+button {
+    font-size: 1.3em;
+    width: 150px;
+    padding: 5px;
+    color: white;
+}
+
+#start-button, #resume-button, #break-button {
+    background-color: rgb(12, 154, 12);
+}
+
+#reset-button {
+    background-color: rgb(128, 128, 128);
+}
+
+#stop-button {
+    background-color: rgb(154, 12, 12);
+}
+
+#pause-button {
+    background-color: rgb(12, 12, 154);
+}
+
 table, td, th, tr {
     border: 1px solid black;
 }
