@@ -9,8 +9,8 @@ class Timer {
         this.secondsElapsed = 0;
         this.timerBody = document.querySelector("#timer");
         this.formValues = document.querySelector("#work-params");
-        this.mainButton = document.querySelector("#main-button");
-        this.secondButton = document.querySelector("#second-button");
+        this.mainButton = document.querySelector(".main-button");
+        this.secondButton = document.querySelector(".second-button");
         this.workField = document.querySelector("#work");
         this.shortBreakField = document.querySelector("#sbreak")
         this.sound = document.querySelector("audio");
@@ -55,10 +55,12 @@ class Timer {
     }
 
     set mainButtonText(text) {
+        this.mainButton.setAttribute("id", text.toLowerCase()+"-button")
         this.mainButton.textContent = text;
     }
 
     set secondButtonText(text) {
+        this.secondButton.setAttribute("id", text.toLowerCase()+"-button")
         this.secondButton.textContent = text;
     }
 
@@ -82,7 +84,7 @@ class Timer {
         this.secondsElapsed = 0;
         return setInterval(() => {
             if (!this.pause && (this.working || this.onBreak)) {
-                this.secondsElapsed += 10;
+                this.secondsElapsed += 1;
                 timer.timerText = seconds - this.secondsElapsed;
                 this.pageTitle = this.timerBody.innerHTML;
                 if (this.onBreak && this.secondsElapsed >= seconds) {
@@ -175,8 +177,8 @@ class Timer {
             this.secondButtonText = "Reset";
         } else if (command === "pause") {
             this.pause = true;
-            this.secondButtonText = "Unpause";
-        } else if (command === "unpause") {
+            this.secondButtonText = "Resume";
+        } else if (command === "resume") {
             this.pause = false;
             this.secondButtonText = "Pause";
         }
