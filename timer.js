@@ -7,7 +7,7 @@ class Timer {
         this.working = false;
         this.pause = true;
         this.secondsElapsed = 0;
-        this.timerBody = document.querySelector("#timer");
+        this.timerBody = document.querySelector(".timer");
         this.formValues = document.querySelector("#work-params");
         this.mainButton = document.querySelector(".main-button");
         this.secondButton = document.querySelector(".second-button");
@@ -47,10 +47,12 @@ class Timer {
             this.countDown = true;
             this.countUp = false;
             this.timerBody.innerHTML = this.convertToTime(seconds);
+            this.timerBody.setAttribute("id", "countdown");
         } else if (this.working) {
             this.countUp = true;
             this.countDown = false;
             this.timerBody.innerHTML = "+" + this.convertToTime(seconds*-1);
+            this.timerBody.setAttribute("id", "countup");
         }
     }
 
@@ -123,6 +125,7 @@ class Timer {
         this.shortBreak = false;
         this.longBreak = false;
         this.timerText = this.workTime*60;
+        this.pageTitle = this.timerBody.innerHTML;
         clearInterval(this.runningTimer);
     }
 
@@ -175,6 +178,7 @@ class Timer {
             this.timerText = 10*60;
             this.mainButtonText = "Start";
             this.secondButtonText = "Reset";
+            this.pageTitle = this.timerBody.innerHTML;
         } else if (command === "pause") {
             this.pause = true;
             this.secondButtonText = "Resume";

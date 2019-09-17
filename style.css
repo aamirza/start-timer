@@ -11,17 +11,47 @@ table {
     margin-right: auto;
 }
 
-#timer {
+.timer {
     font-size: 4rem;
     margin-bottom: 2px;
 }
 
-button {
+.timer-button {
     font-size: 1.3em;
     width: 150px;
     padding: 5px;
     color: white;
 }
+
+.minute-selector {
+    /* display: inline-block; */
+    margin: 0 auto 15px;
+    width: 60px;
+    height: 40px;
+    padding: 3px;
+    font-size: 1.4em;
+    text-align: center;
+}
+
+.minute-text {
+    font-size: 1.3em;
+    margin: 10px 0 1px;
+}
+
+/* To turn work/break setters into two columns */
+
+.column {
+    float: center;
+    display: inline-block;
+    width: 70px;
+}
+
+.row:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
 
 #start-button, #resume-button, #break-button {
     background-color: rgb(12, 154, 12);
@@ -39,10 +69,102 @@ button {
     background-color: rgb(12, 12, 154);
 }
 
-table, td, th, tr {
-    border: 1px solid black;
+#countup {
+    color: rgb(2, 170, 2);
+}
+
+table {
+    border: 1px solid;
+    font-family: Trebuchet MS, Arial;
+    border-collapse: collapse;
+}
+
+th {
+    width: 70px
 }
 
 th, tr {
     padding: 1px 5px;
+}
+
+.work-column {
+    border-bottom: 1px solid black;
+}
+
+.footer-col {
+    font-weight: bold;
+}
+
+#view-select {
+    margin: 35px 80px;
+    text-align: right;
+    border-bottom: 1px solid black;
+}
+
+.view {
+    margin: 10px 0;
+    cursor: pointer;
+    padding: 5px 15px;
+}
+
+.view:hover {
+    text-decoration: underline;
+}
+
+.selected-pane {
+    border: 1px solid black;
+    border-bottom: 0px;
+    background-image: linear-gradient(rgb(112, 204, 122) 2%, white);
+}
+
+.pane {
+    display: none;
+}
+
+.current-pane {
+    display: block;
+}
+
+.work-column:nth-of-type(odd) {
+    background-color: rgba(112, 204, 122, 0.3)
+}
+
+.work-column:nth-of-type(even) {
+    background-color: rgba(12, 124, 12, 0.3)
+}
+
+td {
+    text-align: center;
+}
+
+#task-header th {
+    border-right: 1px solid black;
+}
+
+.checkbox {
+    width: 15px;
+}
+
+#task-box {
+    width: 60%;
+    height: 30px;
+    vertical-align: middle;
+}
+
+#add-task {
+    font-size: 1.4em;
+    height: 30px;
+    line-height: 10px;
+    vertical-align: middle;
+    background-color: rgb(12, 124, 12);
+    border-radius: 50%;
+    border: 0px;
+    margin-left: 5px;
+    text-align: center;
+    color: white;
+    text-align: center;
+}
+
+#add-task:active {
+    background-color: rgb(6, 64, 6);
 }
