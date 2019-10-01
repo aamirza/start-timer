@@ -1,4 +1,6 @@
 const timer = new Timer();
+const taskManager = new TaskManager(document.querySelector("#task-list"),
+                                    document.querySelector("#task-pane"));
 
 document.querySelector(".main-button").addEventListener("click", (event) => {
     timer.mainButtonPress(event);
@@ -6,6 +8,10 @@ document.querySelector(".main-button").addEventListener("click", (event) => {
 
 document.querySelector(".second-button").addEventListener("click", (event) => {
     timer.secondButtonPress(event)
+});
+
+document.querySelector("#add-task").addEventListener("click", (event) => {
+    taskManager.addTaskButtonClick(event);
 });
 
 document.querySelectorAll(".view").forEach((element) => {
