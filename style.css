@@ -137,6 +137,8 @@ td {
     text-align: center;
 }
 
+/* Task Table */
+
 #task-header th {
     border-right: 1px solid black;
 }
@@ -167,4 +169,19 @@ td {
 
 #add-task:active {
     background-color: rgb(6, 64, 6);
+}
+
+.task-name {
+    width: 70%;
+    text-align: left;
+}
+
+.task-row td {
+    border-left: 1px solid;
+    padding: 3px;
+}
+
+.task-complete {
+    text-decoration: line-through;
+    color: grey;
 }
