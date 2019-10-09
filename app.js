@@ -14,6 +14,10 @@ document.querySelector("#add-task").addEventListener("click", (event) => {
     taskManager.addTaskButtonClick(event);
 });
 
+document.querySelector("#task-list").addEventListener("click", (event) => {
+    taskManager.crossOutTask(event);
+});
+
 document.querySelectorAll(".view").forEach((element) => {
     element.addEventListener("click", (event) => {
         document.querySelectorAll(".view").forEach((paneButton) => {
