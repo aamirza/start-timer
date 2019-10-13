@@ -11,6 +11,10 @@ class TaskManager extends Table {
         return this.taskBox.value;
     }
 
+    get selectedTask() {
+        return document.querySelector("#selected-task");
+    }
+
     set textBoxText(text="") {
         this.taskBox.value = text;
     }
@@ -23,13 +27,16 @@ class TaskManager extends Table {
     }
 
     crossOutTask(clickEvent) {
-        if (clickEvent.target.getAttribute("type") !== "checkbox") {
-            return
-        } else {
+        if (clickEvent.target.getAttribute("type") === "checkbox") {
             clickEvent.target.parentElement.parentElement.classList.toggle("task-complete");
         }
     }
 
+    selectTask(clickEvent) {
+        const allTasks = document.querySelectorAll(".task-name");
+        allTasks.forEach((task) => task.removeAttribute("id"));
+        clickEvent.target.setAttribute("id", "selected-task");
+    }
 
     addTaskRow(taskName) {
         const taskRow = super.createElementWith("tr", {className: "task-row"});
@@ -44,10 +51,6 @@ class TaskManager extends Table {
         const editors = super.createElementWith("td", {
             className: "editors",
         })
-        // taskRow.appendChild(checkBox);
-        // taskRow.appendChild(task);
-        // taskRow.appendChild(editors);
-        // this.table.appendChild(taskRow);
         super.addRow(taskRow, [checkBox, task, editors]);
         }
 };
