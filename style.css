@@ -3,6 +3,7 @@ body {
     margin-right: auto;
     width: 50%;
     text-align: center;
+    font-family: "Lantinghei TC", "Avenir Next", Arial;
 }
 
 table {
@@ -12,8 +13,8 @@ table {
 }
 
 .timer {
-    font-size: 4rem;
-    margin-bottom: 2px;
+    font-size: 4.5rem;
+    margin-bottom: -5px;
 }
 
 .timer-button {
@@ -34,7 +35,7 @@ table {
 }
 
 .minute-text {
-    font-size: 1.3em;
+    font-size: 1.2em;
     margin: 10px 0 1px;
 }
 
@@ -73,7 +74,7 @@ table {
     color: rgb(2, 170, 2);
 }
 
-table {
+#work-table {
     border: 1px solid;
     font-family: Trebuchet MS, Arial;
     border-collapse: collapse;
@@ -99,6 +100,7 @@ th, tr {
     margin: 35px 80px;
     text-align: right;
     border-bottom: 1px solid black;
+    font-size: 0.9em;
 }
 
 .view {
@@ -140,7 +142,7 @@ td {
 /* Task Table */
 
 #task-header th {
-    border-right: 1px solid black;
+    /*border-right: 1px solid black;*/
 }
 
 .checkbox {
@@ -171,17 +173,30 @@ td {
     background-color: rgb(6, 64, 6);
 }
 
+#task-list {
+    font-family: Trebuchet MS, Arial;
+    border-collapse: collapse;
+}
+
 .task-name {
-    width: 70%;
+    width: 120%;
     text-align: left;
 }
 
 .task-row td {
-    border-left: 1px solid;
+    /*border-left: 1px solid;*/
     padding: 3px;
 }
 
 .task-complete {
     text-decoration: line-through;
     color: grey;
+}
+
+#task-header {
+    text-align: left;
+}
+
+#selected-task {
+    background-color: rgba(12, 124, 12, 0.3)
 }
