@@ -6,9 +6,7 @@ class Worklog extends Table {
 
     removeNoWorkRow() {
         const noWorkRow = document.querySelector("#no-work-recorded");
-        if (noWorkRow) {
-            noWorkRow.parentElement.removeChild(noWorkRow);
-        }
+        if (noWorkRow) noWorkRow.parentElement.removeChild(noWorkRow);
     }
 
     addWorkRow(startTime, workLength, breakLength) {
@@ -25,9 +23,7 @@ class Worklog extends Table {
             className: "break-time",
             innerHTML: breakLength
         });
-        tableRow.appendChild(startTimeRow);
-        tableRow.appendChild(workLengthRow);
-        tableRow.appendChild(breakLengthRow);
+        super.addRow(tableRow, [startTimeRow, workLengthRow, breakLengthRow]);
         this.table.appendChild(tableRow);
     }
 
@@ -47,17 +43,13 @@ class Worklog extends Table {
         });
         const totalWorkCell = super.createElementWith("td", {idName: "total-work"});
         const totalBreakCell = super.createElementWith("td", {idName: "total-break"});
-        footerRow.appendChild(firstCell);
-        footerRow.appendChild(totalWorkCell);
-        footerRow.appendChild(totalBreakCell);
+        super.addRow(footerRow, [firstCell, totalWorkCell, totalBreakCell]);
         this.table.appendChild(footerRow);
         this.totalsRow = document.querySelector(".footer-col");
     }
 
     calculateTotalsRow() {
-        if (!this.totalsRow) {
-            this.createTotalsRow();
-        }
+        if (!this.totalsRow) this.createTotalsRow();
         const allWorkRows = document.querySelectorAll(".work-time");
         const allBreakRows = document.querySelectorAll(".break-time");
         const totalWork = this.calculateTotal(allWorkRows);
