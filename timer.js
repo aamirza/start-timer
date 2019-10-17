@@ -15,6 +15,7 @@ class Timer {
         this.shortBreakField = document.querySelector("#sbreak")
         this.sound = document.querySelector("audio");
         this.table = new Worklog(document.querySelector("#work-table"));
+        this.taskList = new TaskManager(document.querySelector("#task-list"));
 
     }
 

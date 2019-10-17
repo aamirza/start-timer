@@ -13,6 +13,7 @@ document.querySelector(".second-button").addEventListener("click", (event) => {
 document.querySelector("#task-box").addEventListener("keyup", (event) => {
     event.preventDefault();
     if (event.keyCode === 13) {
+        taskManager.showTable();
         taskManager.addTaskButtonClick(event);
     }
 })
