@@ -3,6 +3,10 @@ class Table {
         this.table = tableElement;
     }
 
+    showTable() {
+        this.table.style.display = "block";
+    }
+
     createElementWith(element, options) {
         const cell = document.createElement(element);
         if ('className' in options) cell.setAttribute("class", options.className);
