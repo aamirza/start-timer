@@ -104,16 +104,19 @@ class Timer {
 
     beep() {
         if (document.querySelector("input[name=sound]").checked) {
-            this.sound.play();
+            return this.sound.play();
         } else {
-            this.sound.pause();
+            return this.sound.pause();
         }
     }
 
     breakOver() {
         this.stopCommand();
+        const _this = this;
         this.beep();
-        alert("Your break is over!");
+        this.beeping = setInterval(() => {
+            _this.beep();
+        }, 7000);
         this.sound.pause();
     }
 
@@ -133,6 +136,7 @@ class Timer {
     mainButtonPress(buttonEvent) {
         const command = buttonEvent.target.textContent.toLowerCase();
         if (command === "start") {
+            clearInterval(this.beeping);
             this.timerText = this.workTime * 60;
             this.working = true;
             this.pause = false;
