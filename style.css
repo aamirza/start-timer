@@ -200,3 +200,23 @@ td {
 #selected-task {
     background-color: rgba(12, 124, 12, 0.3)
 }
+
+/* Mobile compatibility */
+
+@media(max-device-width: 720px) {
+    body {
+        width: 90%;
+    }
+
+    .timer-button {
+        margin: auto;
+        display: block;
+        text-align: center;
+    }
+
+    .view {
+        text-align: center;
+    }
+}
+
+
